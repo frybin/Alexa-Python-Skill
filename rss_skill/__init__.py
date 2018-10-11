@@ -1,7 +1,9 @@
 import os
 from flask import Flask
+from flask_ask import Ask, statement
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
+ask = Ask(app, '/')
 
 # Get app config from absolute file path
 if os.path.exists(os.path.join(os.getcwd(), "config.py")):
@@ -19,7 +21,6 @@ def get_all_info_feeds():
     feeds = Feed.query.all()
     feed_info = []
     for feed in feeds:
-        print(feed)
         info, hashed = feed_parser(feed.link, feed.article_1, feed.article_2)
         feed.post = hashed
         db.session.commit()
@@ -32,6 +33,7 @@ def get_all_info_feeds():
         response = "There were no data found"
     return response
 
+@ask.intent('RSSWordIntent', mapping={'rss_id': 'feedname'})
 def get_info_single_feed(rss_id):
     feed = Feed.query.get(rss_id)
     feed_info = []
@@ -44,8 +46,9 @@ def get_info_single_feed(rss_id):
         response = ", ".join(feed_info)
     else:
         response = "There were no data found"
-    return response
+    return statement(response).simple_card('', response)
 
+@ask.intent('UpdateFeedIntent')
 def get_current_updates():
     feeds = Feed.query.all()
     feed_info = []
@@ -62,8 +65,9 @@ def get_current_updates():
         response = ", ".join(feed_info)
     else:
         response = "There were no updates found"
-    return response
+    return statement(response).simple_card('', response)
 
+@ask.intent('RSSLinkIntent')
 def get_all_feeds():
     feeds = Feed.query.all()
     feed_info = []
@@ -73,6 +77,8 @@ def get_all_feeds():
         response = ", ".join(feed_info)
     else:
         response = "There were no feeds found"
-    return response
+    return statement(response).simple_card('', response)
 
-print(get_all_info_feeds())
+@ask.session_ended
+def session_ended():
+    return "{}", 200
