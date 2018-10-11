@@ -1,4 +1,3 @@
-import secrets
 from os import environ as env
 
 # Flask config
