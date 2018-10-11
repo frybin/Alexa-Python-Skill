@@ -19,6 +19,7 @@ def feed_parser(link, tag1='title', tag2='summary'):
             simple.append(post[tag2])
         except:
             pass
+        simple.append(hash_object(post))
         data.append(simple)
     return data, hashed
 
