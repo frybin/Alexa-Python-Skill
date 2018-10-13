@@ -17,7 +17,7 @@ def feed_parser(link, tag1='title', tag2='summary'):
             hashed = hash_object(post)
         try:
             simple.append(post[tag2])
-        except TypeError:
+        except:
             pass
         simple.append(hash_object(post))
         data.append(simple)
