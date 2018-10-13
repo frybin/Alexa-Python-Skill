@@ -9,4 +9,5 @@ SERVER_NAME = env.get('SERVER_NAME', 'rss-skill.csh.rit.edu')
 SQLALCHEMY_DATABASE_URI = env.get('SQLALCHEMY_DATABASE_URI')
 SQLALCHEMY_TRACK_MODIFICATIONS = 'False'
 
+#WTF Form Secret
 SECRET_KEY = env.get('SECRET_KEY')
