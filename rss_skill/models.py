@@ -14,13 +14,11 @@ class Feed(db.Model):
     article_2 = db.Column(db.Text, nullable=False)
     post = db.Column(db.String(32), nullable=False)
 
-    def __init__(self, rss_i, name, link, article_1, article_2, post):
-        self.rss_i = rss_i
+    def __init__(self, name, link, article_1, article_2):
         self.name = name
         self.link = link
         self.article_1 = article_1
         self.article_2 = article_2
-        self.post = post
 
     def __repr__(self):
         return f'Feed {self.rss_i}: {self.name}'

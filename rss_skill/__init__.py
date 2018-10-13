@@ -15,6 +15,7 @@ db = SQLAlchemy(app)
 
 # pylint: disable=wrong-import-position
 from rss_skill.models import Feed
+import rss_skill.routes
 from .utils import feed_parser
 
 @ask.intent('AllRSSWordIntent')
@@ -33,10 +34,6 @@ def get_all_info_feeds():
     else:
         response = "There were no data found"
     return response
-
-@app.route('/')
-def index():
-    return "Hi"
 
 @ask.launch
 def launch():
