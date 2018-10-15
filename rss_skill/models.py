@@ -19,6 +19,7 @@ class Feed(db.Model):
         self.link = link
         self.article_1 = article_1
         self.article_2 = article_2
+        self.post = ""
 
     def __repr__(self):
         return f'Feed {self.rss_i}: {self.name}'
