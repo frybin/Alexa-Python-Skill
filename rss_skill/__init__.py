@@ -78,6 +78,7 @@ def get_current_updates():
     for feed in feeds:
         info, hashed = feed_parser(feed.link, feed.article_1, feed.article_2)
         if hashed != feed.post:
+            feed_info.append(f"Updates for feed {feed.rss_i}, {feed.name}:")
             for data in info:
                 if feed.post == data[len(data)-1]:
                     break
