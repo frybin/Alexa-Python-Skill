@@ -46,7 +46,7 @@ def get_all_feeds():
     feed_info = ["Would you like to hear the feeds for: "]
     i = 1
     for feed in feeds:
-        feed_info.append(f"{feed.rss_i}, {feed.name}")
+        feed_info.append(f"Number {feed.rss_i}, {feed.name}")
         if i < len(feeds):
             feed_info.append("or")
         i = i+1
